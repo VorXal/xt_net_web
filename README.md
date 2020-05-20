@@ -1,2 +1,2 @@
 # EPAM
- Tasks in <EPAM> education center
+ Tasks in <EPAM> educational center
