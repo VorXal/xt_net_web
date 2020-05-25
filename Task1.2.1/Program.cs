@@ -1,4 +1,9 @@
 ﻿using System;
+/// <summary>
+/// Напишите программу, которая определяет среднюю длину слова во введённой текстовой строке. 
+/// Учтите, что символы пунктуации на длину слов влиять не должны. 
+/// Не стоит искать каждый символ-разделитель вручную: пожалейте своё время и используйте стандартные методы классов String и Char.
+/// </summary>
 
 namespace Task1._2._1
 {
@@ -6,25 +11,22 @@ namespace Task1._2._1
     {
         static void Main(string[] args)
         {
-            int words = 0;
-            int letters = 0;
+            float sum = 0;
+            string inputString = "Викентий хорошо отметил день рождения: покушал пиццу, посмотрел кино, пообщался со студентами в чате";
 
-            string s1 = "Викентий хорошо отметил день рождения: покушал пиццу, посмотрел кино, пообщался со студентами в чате";
+            char[] chars = { ' ', ',', ':' };
 
-            for (int ctr = 0; ctr < s1.Length; ctr++)
+            string[] words = inputString.Split(chars, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var i in words)
             {
-                if (Char.IsPunctuation(s1[ctr]) | Char.IsWhiteSpace(s1[ctr]))
-                {
-                    words++;
-                    if (Char.IsPunctuation(s1[ctr]))
-                        ctr++;
-                }
-                else
-                    letters++;
+                sum += i.Length;
             }
 
-            Console.WriteLine(words);
-            Console.WriteLine(letters);
+            float result = sum / (float)words.Length; //Ответ остается в виде дробного результата
+
+            Console.WriteLine("Words: " + words.Length);
+            Console.WriteLine("Average number of characters: " + result);
             Console.ReadKey();
         }
     }
