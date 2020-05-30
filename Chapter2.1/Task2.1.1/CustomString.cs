@@ -2,9 +2,49 @@
 
 namespace Task2._1._1
 {
-    class CustomString
+    public class CustomString
     {
-        char[] customString;
+        private char[] customString;
+        public int Length
+        {
+            get
+            {
+                return customString.Length;
+            }
+        }
+
+        public char this[int index]
+        {
+            get
+            {
+                return customString[index];
+            }
+            private set
+            {
+                customString[index] = value;
+            }
+        }
+
+
+        public CustomString(char[] input)
+        {
+            this.customString = new char[input.Length];
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                customString[i] = input[i];
+            }
+        }
+
+        public CustomString(string input)
+        {
+            this.customString = new char[input.Length];
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                customString[i] = input[i];
+            }
+        }
 
         public void PrintCustomString()
         {
@@ -24,78 +64,34 @@ namespace Task2._1._1
             Console.WriteLine();
         }
 
-        public int GetLength()
+        public override int GetHashCode()
         {
-            return customString.Length;
+            return this.customString.GetHashCode();
         }
 
-        public bool IsEqual(CustomString secondCustomString)
+        public override bool Equals(object obj)
         {
-            if(customString.Length == secondCustomString.GetLength())
-            {
-                for(int i = 0; i < customString.Length; i++)
-                {
-                    if(customString[i] == secondCustomString.customString[i])
-                    {
-                        if(i == customString.Length - 1)
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                return false;
-            }
-        }
+            if (obj.GetType() != this.GetType()) return false;
 
-        public static bool IsEqual(CustomString firstCustomString, CustomString secondCustomString)
-        {
-            if (firstCustomString.GetLength() == secondCustomString.GetLength())
-            {
-                for (int i = 0; i < firstCustomString.GetLength(); i++)
-                {
-                    if (firstCustomString.customString[i] == secondCustomString.customString[i])
-                    {
-                        if (i == firstCustomString.GetLength() - 1)
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                return false;
-            }
+            CustomString cs = (CustomString)obj;
+            return (this.customString == cs.customString);
         }
 
         public CustomString ConcatCustomString(CustomString secondCustomString)
         {
             int firstCustomStringLength = customString.Length;
             CustomString firstCustomString = new CustomString(customString);
-            customString = new char[customString.Length + secondCustomString.GetLength()];
+            customString = new char[customString.Length + secondCustomString.Length];
 
-            for(int i = 0; i < firstCustomStringLength + secondCustomString.GetLength(); i++)
+            for(int i = 0; i < firstCustomStringLength + secondCustomString.Length; i++)
             { 
                 if(i < firstCustomStringLength)
                 {
-                    customString[i] = firstCustomString.customString[i];
+                    customString[i] = firstCustomString[i];
                 }
                 else
                 {
-                    customString[i] = secondCustomString.customString[i - firstCustomString.GetLength()];
+                    customString[i] = secondCustomString[i - firstCustomString.Length];
                 }
             }
 
@@ -104,28 +100,28 @@ namespace Task2._1._1
 
         public static CustomString ConcatCustomString(CustomString firstCustomString, CustomString secondCustomString)
         {
-            char[] customString = new char[firstCustomString.GetLength() + secondCustomString.GetLength()];
+            char[] customString = new char[firstCustomString.Length + secondCustomString.Length];
 
-            for (int i = 0; i < firstCustomString.GetLength() + secondCustomString.GetLength(); i++)
+            for (int i = 0; i < firstCustomString.Length + secondCustomString.Length; i++)
             {
-                if (i < firstCustomString.GetLength())
+                if (i < firstCustomString.Length)
                 {
-                    customString[i] = firstCustomString.customString[i];
+                    customString[i] = firstCustomString[i];
                 }
                 else
                 {
-                    customString[i] = secondCustomString.customString[i - firstCustomString.GetLength()];
+                    customString[i] = secondCustomString[i - firstCustomString.Length];
                 }
             }
 
             return new CustomString(customString);
         }
 
-        public int FindCharInCustomString(char find)
+        public int GetPositionCharInCustomString(char find)
         {
-            for (int i = 0; i < this.GetLength(); i++)
+            for (int i = 0; i < this.Length; i++)
             {
-                if (this.customString[i] == find)
+                if (this[i] == find)
                 {
                     return i;
                 }
@@ -133,11 +129,11 @@ namespace Task2._1._1
             return -1;
         }
 
-        public static int FindCharInCustomString(char find, CustomString input)
+        public static int GetPositionCharInCustomString(char find, CustomString input)
         {
-            for(int i = 0; i < input.GetLength(); i++)
+            for(int i = 0; i < input.Length; i++)
             {
-                if(input.customString[i] == find)
+                if(input[i] == find)
                 {
                     return i;
                 }
@@ -185,24 +181,5 @@ namespace Task2._1._1
             return count;
         }
 
-        public CustomString(char[] input)
-        {
-            this.customString = new char[input.Length];
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                customString[i] = input[i];
-            }
-        }
-
-        public CustomString(string input)
-        {
-            this.customString = new char[input.Length];
-
-            for (int i = 0; i < input.Length; i++)
-            {
-                customString[i] = input[i];
-            }
-        }
     }
 }
