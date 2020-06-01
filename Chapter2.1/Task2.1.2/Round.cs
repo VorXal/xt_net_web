@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task2._1._2
 {
-    class Rectangle
+    public class Round : Circle
     {
+
     }
 }
