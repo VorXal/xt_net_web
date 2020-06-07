@@ -22,6 +22,7 @@ namespace Task2._1._1
             char[] a = cs3.ReturnArray();
             Console.WriteLine(a);
             Console.WriteLine(CustomString.CountOfCharInCustomString('H', cs3));
+            Console.WriteLine(cs1[1]);
             Console.ReadKey();
         }
     }

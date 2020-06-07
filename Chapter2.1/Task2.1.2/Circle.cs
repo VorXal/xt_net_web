@@ -2,32 +2,44 @@
 
 namespace Task2._1._2
 {
-    public class Circle : Figure
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Radius { get; set; }
+    public class Circle : AbstractCircle, IFigure
+    {/*
+        public Point Center { get; private set; }
+        public double Radius { get; private set; }*/
 
-        public Circle(double x, double y, double radius)
+
+        public override double GetCircumference() => 2 * Math.PI * Radius;
+
+        public void GetInfo()
         {
-            this.X = x;
-            this.Y = y;
-            this.Radius = radius;
+            Console.WriteLine($"Class: {GetType().Name}, Center: ({Center.X};{Center.Y}), Radius: {Radius}");
         }
 
-        public Circle() { }
-
-        public double GetCircumference()
+        public double GetArea()
         {
-            return 2 * Math.PI * Radius;
+            throw new Exception("Circle haven't area");
         }
 
-        public override void GetInfo()
+        public Circle():base(new Point(0,0), 1) { }
+
+        public Circle(Point center, double radius):
+            base(center, radius){ }
+
+        public static Circle CreateCircle()
         {
-            Console.WriteLine($"Class: {this.GetType().Name}, Center: ({X};{Y}), Radius: {Radius}");
+            Console.WriteLine("Создаем окружность...");
+            Console.Write("Введите центральную точку: ");
+            Point center = Point.CreatePoint();
+            Console.Write("Введите радиус: ");
+            if (Double.TryParse(Console.ReadLine(), out double radius))
+            {
+                return new Circle(center, radius);
+            }
+            else
+            {
+                Console.WriteLine("String could not be parsed.");
+                return null;
+            }
         }
-
-
-
     }
 }
