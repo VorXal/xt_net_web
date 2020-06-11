@@ -46,22 +46,9 @@ namespace Task2._1._1
             }
         }
 
-        public void PrintCustomString()
+        public override string ToString()
         {
-            foreach(var i in this.customString)
-            {
-                Console.Write(i);
-            }
-            Console.WriteLine();
-        }
-
-        public static void PrintCustomString(CustomStringFromDLL input)
-        {
-            foreach (var i in input.customString)
-            {
-                Console.Write(i);
-            }
-            Console.WriteLine();
+            return new string(this.customString);
         }
 
         public override int GetHashCode()
@@ -83,9 +70,9 @@ namespace Task2._1._1
             CustomStringFromDLL firstCustomString = new CustomStringFromDLL(customString);
             customString = new char[customString.Length + secondCustomString.Length];
 
-            for(int i = 0; i < firstCustomStringLength + secondCustomString.Length; i++)
-            { 
-                if(i < firstCustomStringLength)
+            for (int i = 0; i < firstCustomStringLength + secondCustomString.Length; i++)
+            {
+                if (i < firstCustomStringLength)
                 {
                     customString[i] = firstCustomString[i];
                 }
@@ -131,9 +118,9 @@ namespace Task2._1._1
 
         public static int GetPositionCharInCustomString(char find, CustomStringFromDLL input)
         {
-            for(int i = 0; i < input.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
-                if(input[i] == find)
+                if (input[i] == find)
                 {
                     return i;
                 }
@@ -143,12 +130,12 @@ namespace Task2._1._1
 
         public char[] ReturnArray()
         {
-            return this.customString;
+            return (char[])this.customString.Clone();
         }
 
         public static char[] ReturnArray(CustomStringFromDLL input)
         {
-            return input.customString;
+            return (char[])input.customString.Clone();
         }
 
         public int CountOfCharInCustomString(char find)
@@ -170,9 +157,9 @@ namespace Task2._1._1
         {
             int count = 0;
 
-            foreach(var i in input.customString)
+            foreach (var i in input.customString)
             {
-                if(i == find)
+                if (i == find)
                 {
                     count++;
                 }
