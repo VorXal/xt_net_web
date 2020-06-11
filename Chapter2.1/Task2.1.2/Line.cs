@@ -22,11 +22,5 @@ namespace Task2._1._2
             Console.WriteLine($"Class: {GetType().Name}, Point_1: ({Point1.X};{Point1.Y}), Point_2: ({Point2.X};{Point2.Y})");
         }
 
-        public double GetArea()
-        {
-            Console.WriteLine($"{GetType().Name} can't have area");
-            return 0;
-        }
-
     }
 }

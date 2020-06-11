@@ -39,8 +39,8 @@ namespace Task2._1._2
 
         public override void GetInfo()
         {
-            Console.WriteLine($"Class:{GetType().Name}, Points: \n\t Point_1:({Point1.X};{Point1.Y}), " +
-                $"Point_2:({Point2.X};{Point2.Y}), Point_3:({Point3.X};{Point3.Y})");
+            Console.WriteLine($"Class: {GetType().Name}, Points: \n\t Point_1: ({Point1.X};{Point1.Y}), " +
+                $"Point_2: ({Point2.X};{Point2.Y}), Point_3: ({Point3.X};{Point3.Y})");
         }
 
         public double GetArea()

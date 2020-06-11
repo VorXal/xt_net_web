@@ -57,9 +57,9 @@ namespace Task2._1._2
 
         public override void GetInfo()
         {
-            Console.WriteLine($"Class:{GetType().Name}, " +
+            Console.WriteLine($"Class: {GetType().Name}, " +
                               $"Left Top Point: ({LeftTopPoint.X};{LeftTopPoint.Y}), " +
-                              $"Width:{Width}, Height:{Height}");
+                              $"Width: {Width}, Height: {Height}");
         }
     }
 }

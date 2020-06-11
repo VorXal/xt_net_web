@@ -11,11 +11,6 @@ namespace Task2._1._2
             Console.WriteLine($"Class: {GetType().Name}, Center: ({Center.X};{Center.Y}), Radius: {Radius}");
         }
 
-        public double GetArea()
-        {
-            throw new Exception("Circle haven't area");
-        }
-
         public Circle():base(new Point(0,0), 1) { }
 
         public Circle(Point center, double radius):

@@ -28,13 +28,7 @@ namespace Task2._1._2
 
         public override void GetInfo()
         {
-            Console.WriteLine($"Class:{GetType().Name}, X:{X}, Y:{Y}");
-        }
-
-        public double GetArea()
-        {
-            Console.WriteLine("Point haven't area");
-            return 0;
+            Console.WriteLine($"Class: {GetType().Name}, X:{X}, Y:{Y}");
         }
     }
 }
