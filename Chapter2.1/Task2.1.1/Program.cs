@@ -14,11 +14,6 @@ namespace Task2._1._1
             CustomString customString1 = new CustomString("This string working from class");
 
             Console.WriteLine(customString1.ToString());
-
-            var a = customString.ReturnArray();
-            a[0] = 'A';
-            Console.WriteLine(customString.ToString());
-            Console.WriteLine(new string(a));
         }
     }
 }

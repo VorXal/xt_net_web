@@ -2,10 +2,8 @@
 
 namespace Task2._1._2
 {
-    interface IFigure
+    public interface IHasArea
     {
-        void GetInfo();
-
         double GetArea();
     }
 }

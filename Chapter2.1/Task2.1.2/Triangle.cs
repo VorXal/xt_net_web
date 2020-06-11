@@ -2,7 +2,7 @@
 
 namespace Task2._1._2
 {
-    public class Triangle : IFigure
+    public class Triangle : AbstractFigure, IHasArea
     {
         public Point Point1 { get; private set; }
         public Point Point2 { get; private set; }
@@ -37,7 +37,7 @@ namespace Task2._1._2
                 Line.GetLength(Point3, Point1);
         }
 
-        public void GetInfo()
+        public override void GetInfo()
         {
             Console.WriteLine($"Class:{GetType().Name}, Points: \n\t Point_1:({Point1.X};{Point1.Y}), " +
                 $"Point_2:({Point2.X};{Point2.Y}), Point_3:({Point3.X};{Point3.Y})");
@@ -49,18 +49,6 @@ namespace Task2._1._2
 
             return Math.Sqrt(halfPerimetr * (halfPerimetr - Line.GetLength(Point1, Point2)) *
                 (halfPerimetr - Line.GetLength(Point2, Point3)) * (halfPerimetr - Line.GetLength(Point1, Point3)));
-        }
-
-        public static Triangle CreateTriangle()
-        {
-            Console.WriteLine("Создаем треугольник...");
-            Console.WriteLine("Введите первую точку ");
-            Point first_point = Point.CreatePoint();
-            Console.WriteLine("Введите вторую точку ");
-            Point second_point = Point.CreatePoint();
-            Console.WriteLine("Введите третью точку ");
-            Point third_point = Point.CreatePoint();
-            return new Triangle(first_point, second_point, third_point);
         }
     }
 }
