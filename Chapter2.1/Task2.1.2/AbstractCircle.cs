@@ -2,7 +2,7 @@
 
 namespace Task2._1._2
 {
-    public abstract class AbstractCircle
+    public abstract class AbstractCircle: AbstractFigure
     {
         public Point Center { get; private set; }
 
@@ -18,6 +18,7 @@ namespace Task2._1._2
             }
         }
         public abstract double GetCircumference();
+
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Task2._1._2
 {
-    public class Rectangle : IFigure
+    public class Rectangle : AbstractFigure, IHasArea
     {
         public Point LeftTopPoint { get; private set; }
 
@@ -55,41 +55,11 @@ namespace Task2._1._2
             return width * height;
         }
 
-        public void GetInfo()
+        public override void GetInfo()
         {
-            Console.WriteLine($"Class:{GetType().Name}, " +
+            Console.WriteLine($"Class: {GetType().Name}, " +
                               $"Left Top Point: ({LeftTopPoint.X};{LeftTopPoint.Y}), " +
-                              $"Width:{Width}, Height:{Height}");
-        }
-
-        public static Rectangle CreateRectangle()
-        {
-            Console.WriteLine("Создаем прямоугольник...");
-            Console.WriteLine("Введите левую верхнюю точку: ");
-            Point ltp = Point.CreatePoint();
-            double width = 0;
-            Console.Write("Введите ширину: ");
-            if (Double.TryParse(Console.ReadLine(), out double out_width))
-            {
-                width = out_width;
-            }
-            else
-            {
-                Console.WriteLine("String could not be parsed.");
-                return null;
-            }
-            double height = 0;
-            Console.Write("Введите длину: ");
-            if (Double.TryParse(Console.ReadLine(), out double out_height))
-            {
-                height = out_height;
-                return new Rectangle(ltp, width, height);
-            }
-            else
-            {
-                Console.WriteLine("String could not be parsed.");
-                return null;
-            }
+                              $"Width: {Width}, Height: {Height}");
         }
     }
 }

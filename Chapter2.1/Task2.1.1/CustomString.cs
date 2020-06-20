@@ -46,22 +46,9 @@ namespace Task2._1._1
             }
         }
 
-        public void PrintCustomString()
+        public override string ToString()
         {
-            foreach(var i in this.customString)
-            {
-                Console.Write(i);
-            }
-            Console.WriteLine();
-        }
-
-        public static void PrintCustomString(CustomString input)
-        {
-            foreach (var i in input.customString)
-            {
-                Console.Write(i);
-            }
-            Console.WriteLine();
+            return new string(this.customString);
         }
 
         public override int GetHashCode()
@@ -143,12 +130,12 @@ namespace Task2._1._1
 
         public char[] ReturnArray()
         {
-            return this.customString;
+            return (char[])this.customString.Clone();
         }
 
         public static char[] ReturnArray(CustomString input)
         {
-            return input.customString;
+            return (char[])input.customString.Clone();
         }
 
         public int CountOfCharInCustomString(char find)

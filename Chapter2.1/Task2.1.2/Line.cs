@@ -2,7 +2,7 @@
 
 namespace Task2._1._2
 {
-    public class Line : IFigure
+    public class Line : AbstractFigure
     {
         public Point Point1 { get; private set; }
         public Point Point2 { get; private set; }
@@ -17,25 +17,9 @@ namespace Task2._1._2
 
         public static double GetLength(Point p1, Point p2) => Math.Sqrt((p1.X - p2.X) * (p1.X - p2.X) + (p1.Y - p2.Y) * (p1.Y - p2.Y));
 
-        public void GetInfo()
+        public override void GetInfo()
         {
             Console.WriteLine($"Class: {GetType().Name}, Point_1: ({Point1.X};{Point1.Y}), Point_2: ({Point2.X};{Point2.Y})");
-        }
-
-        public double GetArea()
-        {
-            Console.WriteLine($"{GetType().Name} can't have area");
-            return 0;
-        }
-
-        public static Line CreateLine()
-        {
-            Console.WriteLine("Создаем треугольник...");
-            Console.WriteLine("Введите первую точку ");
-            Point first_point = Point.CreatePoint();
-            Console.WriteLine("Введите вторую точку ");
-            Point second_point = Point.CreatePoint();
-            return new Line(first_point, second_point);
         }
 
     }

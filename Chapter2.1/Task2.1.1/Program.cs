@@ -9,10 +9,11 @@ namespace Task2._1._1
         {
             CustomStringFromDLL customString = new CustomStringFromDLL("This string working from DLL");
 
+            Console.WriteLine(customString.ToString());
+
             CustomString customString1 = new CustomString("This string working from class");
 
-            customString.PrintCustomString();
-            customString1.PrintCustomString();
+            Console.WriteLine(customString1.ToString());
         }
     }
 }
