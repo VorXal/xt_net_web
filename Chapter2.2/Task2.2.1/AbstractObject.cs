@@ -11,7 +11,7 @@ namespace Task2._2._1
 
         public AbstractObject(int x, int y)
         {
-            if(x >= 0 || x <= 100)
+            if(x >= 0 || x <= 24)
             {
                 X = x;
             }
@@ -19,7 +19,7 @@ namespace Task2._2._1
             {
                 throw new Exception($"X out of field for this object, was: {x}");
             }
-            if (y >= 0 || y <= 100)
+            if (y >= 0 || y <= 24)
             {
                 Y = y;
             }
@@ -38,6 +38,8 @@ namespace Task2._2._1
         {
             this.Y += difference;
         }
+
+        public abstract string GetIcon();
 
     }
 }

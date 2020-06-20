@@ -47,6 +47,7 @@
     <Compile Include="AbstractObject.cs" />
     <Compile Include="AbstractPlayer.cs" />
     <Compile Include="Apple.cs" />
+    <Compile Include="Block.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="IAggressive.cs" />

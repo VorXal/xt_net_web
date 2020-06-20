@@ -25,10 +25,5 @@ namespace Task2._2._1
             Health += change;
         }
 
-        public abstract string GetIcon();
-
-        //public abstract void ChangePosition();
-
-        //public abstract void ChangePosition(ConsoleKey key);
     }
 }

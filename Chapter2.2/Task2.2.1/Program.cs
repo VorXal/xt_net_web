@@ -8,25 +8,35 @@ namespace Task2._2._1
         {
             Player player = new Player(12, 24, 100);
             Enemy enemy = new Enemy(12, 17, 20);
+            Apple apple = new Apple(1, 1, 20);
             Field main = new Field();
-            Console.WriteLine(main.IsEmpty(player.GetPosition()));
-            //main.AddPlayer(player);
-            //main.AddEnemy(enemy);
-            //main.DrawField();
-            //Console.WriteLine(main.IsEmpty(player.GetPosition()));
-
-
-            //player.ChangePosition(Console.ReadKey().Key, main);
-            main.AddPlayers(player, enemy);
+            Block block = new Block(4, 17);
+            Block block1 = new Block(4, 16);
+            main.RenderField(player, enemy, apple, block, block1);
             main.DrawField();
+            int i = 0;
             while (true)
             {
+                i++;
                 player.ChangePosition(Console.ReadKey().Key, main);
                 Console.Clear();
-                main.AddPlayers(player, enemy);
+                main.RenderField(player, enemy, apple, block, block1);
+                if(i % 2 == 1)
+                {
+                    enemy.Attack(player, main);
+                }
+
+                apple.SetEffect(player);
+
                 main.DrawField();
+                Console.WriteLine(player.GetInfo());
+
+                if(player.Health <= 0)
+                {
+                    break;
+                }
             }
-            main.DrawField();
+            Console.WriteLine("Game Over!!!");
             Console.ReadKey();
         }
     }

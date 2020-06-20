@@ -28,44 +28,29 @@ namespace Task2._2._1
             }
         }
 
-        public void AddPlayers(params AbstractPlayer[] player)
+        public void RenderField(params AbstractObject[] objects)
         {
-            foreach (AbstractPlayer ap in player)
+            this.ReloadField();
+            foreach (AbstractObject ao in objects)
             {
                 for (int i = 0; i < 25; i++)
                 {
                     for (int j = 0; j < 25; j++)
-                    {
-                        if (ap.GetPosition()[0] == j && ap.GetPosition()[1] == i)
+                    { 
+                        if (ao.GetPosition()[0] == j && ao.GetPosition()[1] == i)
                         {
-                            field[i, j] = ap.GetIcon();
+                            field[i, j] = ao.GetIcon();
                         }
                     }
                 }
             }
         }
 
-
-        public void AddEnemy(Enemy enemy)
-        {   
-            for (int i = 0; i < 25; i++)
-            {
-                for (int j = 0; j < 25; j++)
-                {
-                    if (enemy.GetPosition()[0] == j && enemy.GetPosition()[1] == i)
-                    {
-                        field[i, j] = enemy.GetIcon();
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
-
         public void DrawField()
         {
-            for(int i = 24; i > 0; i--)
+            for(int i = 24; i >= 0; i--)
             {
-                for(int j = 0; j < 25; j++)
+                for(int j = 0; j < 24; j++)
                 {
                     Console.Write(field[i,j] + "  ");
                 }
@@ -76,6 +61,18 @@ namespace Task2._2._1
         public bool IsEmpty(int[] position)
         {
             if (field[position[1], position[0]].Equals("."))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsBonus(int[] position)
+        {
+            if (field[position[1], position[0]].Equals("A"))
             {
                 return true;
             }
