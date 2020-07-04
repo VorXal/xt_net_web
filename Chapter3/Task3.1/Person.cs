@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task3._1
+namespace Task3._1._1
 {
     class Person
     {

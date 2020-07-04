@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Task3._1
+namespace Task3._1._1
 {
     class Program
     {
