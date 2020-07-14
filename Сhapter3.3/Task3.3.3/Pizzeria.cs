@@ -36,8 +36,6 @@ namespace Task3._3._3
         }
         private void RemoveOrder(Order order)
         {
-            
-            
             OnGet -= RemoveOrder;
             Orders.Remove(order);
         }
@@ -62,7 +60,5 @@ namespace Task3._3._3
             }
             
         }
-
-        //todo  compliteorder(id) 
     }
 }
