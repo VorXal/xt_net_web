@@ -200,7 +200,7 @@ namespace Task4._1
             }
         }
 
-        public static void CreateBackup(string mainPath)
+        public static void CreateBackup(string nameFolder, string mainPath)
         {
             string pathToBackup = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"BackUpFolder");
             if (!Directory.Exists(pathToBackup))
@@ -209,7 +209,8 @@ namespace Task4._1
             }
             else
             {
-                DirectoryCopy(mainPath, $@"{pathToBackup}\{id++}", true);
+                string dateTimeNowCorrect = DateTime.Now.ToString("s");
+                DirectoryCopy(mainPath, $@"{pathToBackup}\{nameFolder}\{DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss.fff")}", true);
             }
         }
 
@@ -250,8 +251,10 @@ namespace Task4._1
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
             Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
-
-            CreateBackup((e.FullPath.Substring(0, e.FullPath.Length - e.Name.Length)));
+            string mainDir = e.FullPath.Substring(0, e.FullPath.Length - e.Name.Length);
+            string nameDirForBackup = mainDir.Substring(0, mainDir.Length - 1);
+            nameDirForBackup = nameDirForBackup.Substring(nameDirForBackup.LastIndexOf('\\') + 1);
+            CreateBackup(nameDirForBackup, mainDir);
             
         }
 
