@@ -15,41 +15,30 @@ namespace Task4._1
     }
     class Program
     {
-        static int id = 0;
         static void Main(string[] args)
         {
-            string path = GetWatchingFolder();
-            CreateBackupFolder();
-            Watching(path);
-            //PrintWorkMenu(SelectTypeOfWork());
-            //Console.WriteLine(path);
-            //Console.WriteLine(GetDateTime());
-            //Watching(path);
+            Start();
         }
 
-        public static List<string> GetAllDirectoryPaths(string pathMainDirectory)
+        public static void Start()
         {
-            List<string> directoryPaths = new List<string>();
-
-            DirectoryInfo mainDirectory = new DirectoryInfo(pathMainDirectory);
-            DirectoryInfo[] directoryInfos =  mainDirectory.GetDirectories();
-            if(directoryInfos.Length != 0)
+            Console.Clear();
+            CreateBackupFolder();
+            TypeWork type = SelectTypeOfWork();
+            string path = GetFolder(type);
+            if(type == TypeWork.Watch)
             {
-                foreach (var item in directoryInfos)
-                {
-                    string internalDirectoryPath = Path.Combine(pathMainDirectory, $@"{item}\");
-                    directoryPaths.Add(internalDirectoryPath);
-                    foreach(var internalItem in GetAllDirectoryPaths(internalDirectoryPath))
-                    {
-                        directoryPaths.Add(internalItem);
-                    }
-                }
+                Watching(path);
+            }
+            else
+            {
+                Revert(path);
             }
 
-            return directoryPaths;
         }
 
-        public static void Watching(string path)
+
+        private static void Watching(string path)
         {
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
@@ -72,19 +61,59 @@ namespace Task4._1
 
                 watcher.EnableRaisingEvents = true;
 
-                Console.WriteLine("Press 'q' to quit the sample.");
-                while (Console.Read() != 'q') ;
+                Console.WriteLine("Press 'q' to quit and go to main menu");
+                while (Console.ReadLine() != "q") ;
+                Start();
             }
+            
         }
 
-        public static int InsertIntRange(int min, int max)
+        private static void Revert(string path)
+        {
+            string nameDir = path.Substring(0, path.Length);
+            nameDir = nameDir.Substring(nameDir.LastIndexOf('\\') + 1);
+            string pathBackupFolder = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"BackUpFolder\");
+            foreach(var item in Directory.GetDirectories(pathBackupFolder))
+            {
+                if(item.Substring(item.LastIndexOf('\\') + 1) == nameDir)
+                {
+                    string dateTimeOfRevert = SelectRevert(Path.Combine(pathBackupFolder, $@"{nameDir}\"));
+                    string pathToRevert = Path.Combine(Path.Combine(pathBackupFolder, $@"{nameDir}\"), dateTimeOfRevert);
+                    DirectoryInfo dir = new DirectoryInfo(path);
+                    dir.Delete(true);
+                    DirectoryCopy(pathToRevert, path, true);
+                    Console.WriteLine("Done!");
+                }
+            }
+            Console.WriteLine("Press any key for go to main menu");
+            Console.ReadLine();
+            Start();
+        }
+        
+        private static string SelectRevert(string path)
+        {
+            int id = 0;
+            Console.WriteLine("Input id of DateTime to revert for this DateTime");
+            Dictionary<int, string> dict = new Dictionary<int, string>();
+            foreach(var item in Directory.GetDirectories(path))
+            {
+
+                dict.Add(id, item.Substring(item.LastIndexOf('\\') + 1));
+                Console.WriteLine($"ID: {id}, DateTime: {item.Substring(item.LastIndexOf('\\') + 1)}");
+                id++;
+            }
+            int select = InsertIntRange(0, dict.Keys.Count - 1);
+            return dict[select];
+        }
+
+        private static int InsertIntRange(int min, int max)
         {
             int result;
             bool flag = false;
             Console.Write("Your select: ");
             do
             {
-                flag = Int32.TryParse(Console.ReadLine(), out result);
+                flag = int.TryParse(Console.ReadLine(), out result);
 
                 if (!flag || result < min || result > max)
                 {
@@ -98,7 +127,7 @@ namespace Task4._1
             return result;
         }
 
-        public static string GetCorrectPath()
+        private static string GetCorrectPath()
         {
             Console.WriteLine("Insert your path");
             bool flag = false;
@@ -122,15 +151,15 @@ namespace Task4._1
             return path;
         }
 
-        public static string GetWatchingFolder()
+        private static string GetFolder(TypeWork type)
         {
-            Console.WriteLine("Which folder you want to watch?");
-            Console.WriteLine("1) Default");
+            Console.WriteLine($"Which folder you want to {type.ToString().ToLower()}?");
+            Console.WriteLine("1) Default (ExampleFolder in project)");
             Console.WriteLine("2) Your folder");
             switch (InsertIntRange(1, 2))
             {
                 case 1:
-                    string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"ExampleFolder\");
+                    string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"ExampleFolder");
                     
                     if (!File.Exists(path))
                     {
@@ -145,7 +174,7 @@ namespace Task4._1
             }
         }
 
-        public static TypeWork SelectTypeOfWork()
+        private static TypeWork SelectTypeOfWork()
         {
             Console.WriteLine("Which type of work you want to select?");
             Console.WriteLine("1) Revert");
@@ -161,37 +190,8 @@ namespace Task4._1
             }
         }
 
-        public static void PrintWorkMenu(TypeWork type)
-        {
-            Console.Clear();
-            if(type == TypeWork.Revert)
-            {
-                Console.WriteLine("Your select type: Revert");
-            }
-            else
-            {
-                Console.WriteLine("Your select type: Watch");
-            }
-        }
 
-        public static DateTime GetDateTime()
-        {
-            Console.WriteLine("Now u need to insert datetime for revert");
-            bool flag = false;
-            DateTime dateTime;
-            Console.WriteLine("Insert Datetime for revert:");
-            do
-            {
-                flag = DateTime.TryParse(Console.ReadLine(), out dateTime);
-                if (!flag)
-                {
-                    Console.WriteLine("Try one more time");
-                }
-            } while (!flag);
-            return dateTime;
-        }
-
-        public static void CreateBackupFolder()
+        private static void CreateBackupFolder()
         {
             string path = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"BackUpFolder\");
             if (!File.Exists(path))
@@ -200,7 +200,7 @@ namespace Task4._1
             }
         }
 
-        public static void CreateBackup(string nameFolder, string mainPath)
+        private static void CreateBackup(string nameFolder, string mainPath)
         {
             string pathToBackup = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"BackUpFolder");
             if (!Directory.Exists(pathToBackup))
