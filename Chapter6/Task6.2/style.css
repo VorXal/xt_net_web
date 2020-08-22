@@ -1,0 +1,86 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color:white;
+}
+
+.container{
+    width: 500px;
+    height: 300px;
+    background-color:#3366ff;
+    border: 5px solid #0039e6;
+    /* padding: 20px 40px 20px 20px; */
+}
+
+hr { 
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid white;
+    margin: 1em 0; 
+    padding: 0; 
+}
+
+.container hr{
+    margin-top: 20px;
+}
+
+.main_title{
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.email_field{
+    margin-left: 20px;
+}
+
+label{
+    display: block;
+}
+
+.email_field input{
+    color: black;
+    width: 90%;
+    height: 20px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: white;
+}
+
+.password_field{
+    margin: 20px;
+}
+
+.password_field input{
+    color: black;
+    width: 90%;
+    height: 20px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: white;
+}
+
+.first_password{
+    width: 200px;
+    display: inline-block;
+    margin-right: 10%;
+}
+
+.second_password{
+    width: 200px;
+    display: inline-block;
+}
+
+#registr-btn{
+    margin-left: 20px;
+    color: black;
+    padding: 5px;
+    background-color: #ffdb4d;
+    border: none;
+}

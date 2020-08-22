@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Registration Form</title>
+</head>
+<body>
+    <form action="SEND">
+        <div class="container">
+            <p class="main_title">Регистрация</p>
+            <hr>
+            <div class="email_field">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" required>
+            </div>
+            <div class="password_field">
+                <div class="first_password">
+                    <label for="first_pass">Пароль</label>
+                    <input type="password" required>
+                </div>
+                <div class="second_password">
+                    <label for="second_pass">Ещё раз</label>
+                    <input type="password" required>
+                </div>
+            </div>
+            <button type="submit" id="registr-btn">Отправить</button>
+        </div>
+    </form>
+</body>
+</html>
