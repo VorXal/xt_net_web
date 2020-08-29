@@ -8,15 +8,17 @@ const closeChangeBtn = document.getElementById('close-change');
 const addBtn = document.getElementById('add-new');
 const saveBtn = document.getElementById('save');
 const main = document.getElementById('main');
-let nameField = document.getElementById('name');
-let contentField = document.getElementById('content');
+let nameFieldAdd = document.getElementById('name');
+let contentFieldAdd = document.getElementById('content');
+let nameFieldChange = document.getElementById('name-change');
+let contentFieldChange = document.getElementById('content-change');
 const deleteBtns = document.getElementsByClassName('delete-btn');
 let items = document.getElementsByClassName('item');
 
 plusBtn.addEventListener("click", () => {
     modalAdd.style.display = "block";
-    nameField.value = '';
-    contentField.value = '';
+    nameFieldAdd.value = '';
+    contentFieldAdd.value = '';
 }, false);
 
 closeAddBtn.addEventListener("click", () => {
@@ -28,8 +30,8 @@ closeChangeBtn.addEventListener("click", () => {
 }, false)
 
 addBtn.addEventListener("click", () => {
-    let name = nameField.value,
-        content = contentField.value;
+    let name = nameFieldAdd.value,
+        content = contentFieldAdd.value;
     if(name.trim() === '' && content.trim() === ''){
         console.log('Не-а, не добавлю я пустую заметку');
     }
@@ -37,18 +39,6 @@ addBtn.addEventListener("click", () => {
         addNewItem(name, content);
     }
     modalAdd.style.display = "none";
-});
-
-save.addEventListener("click", () => {
-    let name = nameField.value,
-        content = contentField.value;
-    if(name.trim() === '' && content.trim() === ''){
-        console.log('Не-а, не добавлю я пустую заметку');
-    }
-    else{
-        addNewItem(name, content);
-    }
-    modalChange.style.display = "none";
 });
 
 function addNewItem(name, content){
@@ -93,10 +83,15 @@ function deleteItem(htmlObject){
 
 function changeItem(item){
     modalChange.style.display = "block";
-    addBtn.innerText = 'Сохранить';
-    nameField = item.getElementsByClassName('item-name')[0];
-    contentField = item.getElementsByClassName('item-content')[0];
-    //nameField = '';
-    //contentField = '';
-    addBtn.innerText = 'Создать';
+    nameFieldChange.value = item.getElementsByClassName('item-name')[0].innerHTML;
+    contentFieldChange.value = item.getElementsByClassName('item-content')[0].innerHTML;
+    save.addEventListener("click", () => {
+        item.getElementsByClassName('item-name')[0].innerHTML = nameFieldChange.value;
+        item.getElementsByClassName('item-content')[0].innerHTML = contentFieldChange.value;
+        console.log(nameFieldChange.value);
+        console.log(contentFieldChange.value);
+        modalChange.style.display = "none";
+        nameFieldChange.value = '';
+        contentFieldChange.value = '';
+    });
 }
