@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>G-Keep</title>
+</head>
+<body>
+    <header>
+        <hr>
+        <div class="header-container">
+            <div class="search">
+                <button type="submit" class="search-btn">
+                    <img src="icons/search.svg" alt="">
+                </button>
+                <input id="search-field" placeholder="Поиск" type="text">
+            </div>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <div id='main' class="main-container">
+            
+        </div>
+    </main>
+
+    <div class="modal-cont">
+        <div class="modal-add">
+            <div class="modal-container">
+                <div class="modal-cont-container">
+                    <input id="name" type="text" placeholder="Введите заголовок">
+                    <textarea id="content" placeholder="Текст заметки"></textarea>
+                    <div class="btn-container">
+                        <button id="add-new">Создать</button>
+                        <button id="close-add">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-cont">
+        <div class="modal-change">
+            <div class="modal-container">
+                <div class="modal-cont-container">
+                    <input id="name-change" type="text" placeholder="Введите заголовок">
+                    <textarea id="content-change" placeholder="Текст заметки"></textarea>
+                    <div class="btn-container">
+                        <button id="save">Сохранить</button>
+                        <button id="close-change">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="plus">
+        <div class="plus-content">
+        </div>
+    </div>
+    <script src="Service.js"></script>
+    <script src="index.js" type="module"></script>
+</body>
+</html>
