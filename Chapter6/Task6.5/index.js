@@ -12,8 +12,6 @@ let nameFieldAdd = document.getElementById('name');
 let contentFieldAdd = document.getElementById('content');
 let nameFieldChange = document.getElementById('name-change');
 let contentFieldChange = document.getElementById('content-change');
-const deleteBtns = document.getElementsByClassName('delete-btn');
-let items = document.getElementsByClassName('item');
 
 plusBtn.addEventListener("click", () => {
     modalAdd.style.display = "block";
@@ -23,11 +21,11 @@ plusBtn.addEventListener("click", () => {
 
 closeAddBtn.addEventListener("click", () => {
     modalAdd.style.display = "none";
-}, false)
+}, false);
 
 closeChangeBtn.addEventListener("click", () => {
     modalChange.style.display = "none";
-}, false)
+}, false);
 
 addBtn.addEventListener("click", () => {
     let name = nameFieldAdd.value,
@@ -49,22 +47,36 @@ function addNewItem(name, content){
                     <div class="item-content">${content}</div>
                     <button class="delete-btn"><img src="icons/delete.svg"></button>
                     </div>`;
-    main.innerHTML = tempMain + main.innerHTML; 
+    let newItem = document.createElement('div');
+        newItem.id = `item-${id}`;
+        newItem.classList.add('item');
+        newItem.innerHTML = `<div class="item-name">${name}</div>
+                             <div class="item-content">${content}</div>
+                             <button class="delete-btn"><img src="icons/delete.svg"></button>`;
+    main.insertBefore(newItem, main.childNodes[0]);
 
-    for (let i = 0; i < deleteBtns.length; i++) {
-        deleteBtns[i].addEventListener("click", () => {
-            event.stopImmediatePropagation();
-            deleteItem(deleteBtns[i].parentNode);
+    newItem.addEventListener("click", () => {
+        event.stopPropagation();
+        modalChange.style.display = 'block';
+        nameFieldChange.value = newItem.getElementsByClassName('item-name')[0].innerHTML;
+        contentFieldChange.value = newItem.getElementsByClassName('item-content')[0].innerHTML;
+        saveBtn.addEventListener("click", function changeItem(){
+            event.stopPropagation();
+            newItem.getElementsByClassName('item-name')[0].innerHTML = nameFieldChange.value;
+            newItem.getElementsByClassName('item-content')[0].innerHTML = contentFieldChange.value;
+            modalChange.style.display = 'none';
+            nameFieldChange.value = '';
+            contentFieldChange.value = '';
+            saveBtn.removeEventListener("click", changeItem);
         }, false);
-    }
+    }, false);
 
-    for (let i = 0; i < items.length; i++) {
-        items[i].addEventListener("click", () => {
-            changeItem(items[i]);
-        }, false);
-    }
-    console.log('Done');
+    newItem.getElementsByClassName('delete-btn')[0].addEventListener("click", () => {
+        event.stopImmediatePropagation();
+        deleteItem(newItem);
+    }, false);
 }
+
 
 function deleteItem(htmlObject){
     let idHtml = htmlObject.id;
@@ -81,17 +93,4 @@ function deleteItem(htmlObject){
     }
 }
 
-function changeItem(item){
-    modalChange.style.display = "block";
-    nameFieldChange.value = item.getElementsByClassName('item-name')[0].innerHTML;
-    contentFieldChange.value = item.getElementsByClassName('item-content')[0].innerHTML;
-    save.addEventListener("click", () => {
-        item.getElementsByClassName('item-name')[0].innerHTML = nameFieldChange.value;
-        item.getElementsByClassName('item-content')[0].innerHTML = contentFieldChange.value;
-        console.log(nameFieldChange.value);
-        console.log(contentFieldChange.value);
-        modalChange.style.display = "none";
-        nameFieldChange.value = '';
-        contentFieldChange.value = '';
-    });
-}
+
