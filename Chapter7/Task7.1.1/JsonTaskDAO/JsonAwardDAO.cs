@@ -8,12 +8,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace JsonTaskDAO
 {
     public class JsonAwardDAO : IAwardDAO
     {
-        private string pathToFile = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Awards.JSON");
+        private static string pathToFile = WebConfigurationManager.AppSettings.Get("pathToAwardJSON");
+
         public void AddAward(Award award)
         {
             List<Award> temp = GetAllAwards();

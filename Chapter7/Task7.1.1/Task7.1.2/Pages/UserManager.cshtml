@@ -1,0 +1,29 @@
+﻿@using Common
+@using DependencyResolver
+@using Entities
+@{
+    IUserBLL UserLogic = DependencyResolver.UserLogic;
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserManager</title>
+</head>
+<body>
+    <div>
+        <p>Select what u want:</p>
+        <button id="newUser">Create new user</button>
+        <button id="displayUsers" onclick="">Display all users</button>
+        <button id="displayAwards">Display awards which have this user</button>
+        <button id="removeUser">Remove User</button>
+        <button id="addAward">Add award to user</button>
+        <button id="back"><a href="~/Pages/StartPage.cshtml">Go back</a></button>
+    </div>
+    <asp:Div id="Out">
+
+    </asp:Div>
+</body>
+</html>

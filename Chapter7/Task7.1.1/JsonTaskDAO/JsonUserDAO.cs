@@ -4,16 +4,20 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace JsonTaskDAO
 {
     public class JsonUserDAO : IUserDAO
     {
-        private string pathToFile = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, @"Users.JSON");
+
+        private static string pathToFile = WebConfigurationManager.AppSettings.Get("pathToUserJSON");
+        
         public void AddAward(string id, string awardId)
         {
             List<User> temp = GetAllUsers();
