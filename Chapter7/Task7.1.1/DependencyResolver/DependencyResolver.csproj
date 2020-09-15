@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7352771B-3ECE-4ACB-AEE5-720F52822710}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ConsolePL</RootNamespace>
-    <AssemblyName>ConsolePL</AssemblyName>
+    <ProjectGuid>{476EF851-E75F-4788-BD05-EE806495613A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DependencyResolver</RootNamespace>
+    <AssemblyName>DependencyResolver</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,26 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleUserView.cs" />
-    <Compile Include="ConsoleAwardView.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{58B9BE83-5B9E-472B-A075-13CC1632D6F1}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DependencyResolver\DependencyResolver.csproj">
-      <Project>{476EF851-E75F-4788-BD05-EE806495613A}</Project>
-      <Name>DependencyResolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{8B4C07D2-0A0E-4ECE-85E0-735357679812}</Project>
-      <Name>Entities</Name>
+    <ProjectReference Include="..\JsonTaskDAO\JsonTaskDAO.csproj">
+      <Project>{C56D581A-9E3B-4A14-9364-88AD230CE9AA}</Project>
+      <Name>JsonTaskDAO</Name>
     </ProjectReference>
     <ProjectReference Include="..\TaskManager\TaskManager.csproj">
       <Project>{FFE0FF2D-362E-4875-B8B6-94132560C1D3}</Project>

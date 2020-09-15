@@ -1,8 +1,10 @@
 ﻿using Common;
+using DependencyResolver;
 using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager;
@@ -11,8 +13,11 @@ namespace ConsolePL
 {
     public class ConsoleAwardView : IAwardPL
     {
+        private readonly IAwardBLL _awardLogic;
+
         public ConsoleAwardView()
         {
+            _awardLogic = DependencyResolver.DependencyResolver.AwardLogic;
             Console.Clear();
             Console.WriteLine("Welcome to AwardManager");
             Console.WriteLine("What u want to do?");
@@ -59,13 +64,13 @@ namespace ConsolePL
             Console.WriteLine("Please insert title for create new award");
             string title = Console.ReadLine();
             //validation title and bla-bla-bla if it's okay:
-            new AwardManager().AddAward(title);
+            _awardLogic.AddAward(title);
         }
 
         public void DisplayAwards()
         {
             Console.WriteLine("AWARDS:::");
-            foreach (Award a in new AwardManager().GetAllAwards())
+            foreach (Award a in _awardLogic.GetAllAwards())
             {
                 Console.WriteLine(a.ID + "\t" + a.Title);
             }
@@ -77,9 +82,9 @@ namespace ConsolePL
             Console.WriteLine("Please insert ID: ");
             string id = Console.ReadLine();
 
-            Console.WriteLine($"Users which have award: {new AwardManager().GetAwardByID(id).Title}");
+            Console.WriteLine($"Users which have award: {_awardLogic.GetAwardByID(id).Title}");
 
-            foreach (User user in new AwardManager().GetUsers(id))
+            foreach (User user in _awardLogic.GetUsers(id))
             {
                 Console.WriteLine("USER");
                 Console.WriteLine($"ID: "  + user.ID);
@@ -93,7 +98,7 @@ namespace ConsolePL
             Console.WriteLine("Please insert ID: ");
             string id = Console.ReadLine();
 
-            new AwardManager().RemoveAwardByID(id);
+            _awardLogic.RemoveAwardByID(id);
         }
 
         public void AddUser()
@@ -102,7 +107,7 @@ namespace ConsolePL
             string awardId = Console.ReadLine();
             Console.WriteLine("Please insert user ID:");
             string userId = Console.ReadLine();
-            new AwardManager().AddUser(awardId, userId);
+            _awardLogic.AddUser(awardId, userId);
         }
     }
 }

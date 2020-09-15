@@ -14,5 +14,6 @@ namespace Common
         void AddAward(Award award);
         void AddUser(string id, string userId);
         void RemoveAwardByID(string id);
+        void UpdateDatabase(List<Award> awards);
     }
 }

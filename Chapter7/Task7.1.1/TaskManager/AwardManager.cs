@@ -9,24 +9,32 @@ namespace TaskManager
 {
     public class AwardManager : IAwardBLL
     {
+        private readonly IAwardDAO _awardDAO;
+        private readonly IUserDAO _userDAO;
+        public AwardManager(IAwardDAO awardDAO, IUserDAO userDAO)
+        {
+            _awardDAO = awardDAO;
+            _userDAO = userDAO;
+        }
+
         public void AddAward(string title)
         {
-            new JsonAwardDAO().AddAward(new Award(title));
+            _awardDAO.AddAward(new Award(title));
         }
 
         public void AddUser(string id, string userId)
         {
-            new JsonAwardDAO().AddUser(id, userId);
+            _awardDAO.AddUser(id, userId);
         }
 
         public List<Award> GetAllAwards()
         {
-            return new JsonAwardDAO().GetAllAwards();
+            return _awardDAO.GetAllAwards();
         }
 
         public Award GetAwardByID(string id)
         {
-            return new JsonAwardDAO().GetAwardByID(id);
+            return _awardDAO.GetAwardByID(id);
         }
 
         public List<User> GetUsers(string _id)
@@ -35,23 +43,23 @@ namespace TaskManager
             List<User> users = new List<User>();
             foreach(string id in ids)
             {
-                users.Add(new UserManager().GetUserByID(id));
+                users.Add(_userDAO.GetUserByID(id));
             }
             return users;
         }
 
         public void RemoveAwardByID(string id)
         {
-            if(new JsonAwardDAO().GetAwardByID(id).Users.Count != 0)
+            if(_awardDAO.GetAwardByID(id).Users.Count != 0)
             {
-                List<User> users = new JsonUserDAO().GetAllUsers();
+                List<User> users = _userDAO.GetAllUsers();
                 foreach (User user in users)
                 {
                     user.Awards.Remove(user.Awards.FirstOrDefault(n => n == id));
                 }
-                new JsonUserDAO().UpdateDatabase(users);
+                _userDAO.UpdateDatabase(users);
             }
-            new JsonAwardDAO().RemoveAwardByID(id);
+            _awardDAO.RemoveAwardByID(id);
         }
     }
 }

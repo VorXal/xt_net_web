@@ -12,8 +12,10 @@ namespace ConsolePL
 {
     public class ConsoleUserView : IUserPL
     {
+        private readonly IUserBLL _userLogic;
         public ConsoleUserView()
         {
+            _userLogic = DependencyResolver.DependencyResolver.UserLogic;
             Console.Clear();
             Console.WriteLine("Welcome to UserManager");
             Console.WriteLine("What u want to do?");
@@ -51,7 +53,7 @@ namespace ConsolePL
             Console.WriteLine("Insert award id: ");
             string awardId = Console.ReadLine();
 
-            new UserManager().AddAward(id, awardId);
+            _userLogic.AddAward(id, awardId);
         }
 
         public void CreateNewUser()
@@ -69,7 +71,7 @@ namespace ConsolePL
                                    out dob));
 
             int age = InsertValidation.InsertIntRange(1, 100);
-            new UserManager().AddUser(name, dob, age);
+            _userLogic.AddUser(name, dob, age);
         }
 
         public void DisplayMenu()
@@ -87,8 +89,8 @@ namespace ConsolePL
             Console.WriteLine("Please insert ID: ");
             string id = Console.ReadLine();
 
-            Console.WriteLine($"User {new UserManager().GetUserByID(id).Name} have awards:");
-            foreach(Award a in new UserManager().GetAwards(id))
+            Console.WriteLine($"User {_userLogic.GetUserByID(id).Name} have awards:");
+            foreach(Award a in _userLogic.GetAwards(id))
             {
                 Console.WriteLine($"AWARD: {a.Title}");
             }
@@ -98,7 +100,7 @@ namespace ConsolePL
         {
             Console.WriteLine("USERS:::");
             Console.WriteLine("ID \t\t\t\t\t NAME \t AGE");
-            foreach (User u in new UserManager().GetAllUsers())
+            foreach (User u in _userLogic.GetAllUsers())
             {
                 Console.WriteLine($"{u.ID} \t {u.Name} \t {u.Age} ");
             }
@@ -109,7 +111,7 @@ namespace ConsolePL
             Console.WriteLine("Please insert ID: ");
             string id = Console.ReadLine();
 
-            new UserManager().RemoveUserByID(id);
+            _userLogic.RemoveUserByID(id);
         }
     }
 }
