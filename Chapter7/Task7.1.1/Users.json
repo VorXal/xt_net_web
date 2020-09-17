@@ -4,13 +4,34 @@
     "Name": "Misha",
     "DoB": "1999-09-07T00:00:00",
     "Age": 20,
-    "Awards": []
+    "Awards": [
+      "093331f0-ff77-4907-90eb-1e58cb8d1029"
+    ]
   },
   {
     "ID": "a2ecc07b-7d79-43fb-a0ba-f80fa4f81e02",
     "Name": "Lesha",
     "DoB": "1999-11-25T00:00:00",
     "Age": 20,
+    "Awards": [
+      "093331f0-ff77-4907-90eb-1e58cb8d1029",
+      "723bf149-c19b-45f2-acc9-aee8c90fa955"
+    ]
+  },
+  {
+    "ID": "cbca2e1e-aa1f-46d8-aec2-44ccec09ca6b",
+    "Name": "Sveta",
+    "DoB": "1999-07-30T00:00:00",
+    "Age": 21,
     "Awards": []
+  },
+  {
+    "ID": "eac9c9d7-9ab4-4a4d-8149-bf521b4dd67e",
+    "Name": "Dasha",
+    "DoB": "2000-02-20T00:00:00",
+    "Age": 20,
+    "Awards": [
+      "723bf149-c19b-45f2-acc9-aee8c90fa955"
+    ]
   }
 ]

@@ -3,6 +3,39 @@
 @using Entities
 @{
     IUserBLL UserLogic = DependencyResolver.UserLogic;
+    IAwardBLL AwardLogic = DependencyResolver.AwardLogic;
+    var message = "";
+
+
+    if (IsPost)
+    {
+        if (Request.Form["newUserName"] != null)
+        {
+            var newUserName = Request.Form["newUserName"];
+            var newUserDoB = Request.Form["newUserDoB"].AsDateTime();
+            var newUserAge = Request.Form["newUserAge"].AsInt();
+            UserLogic.AddUser(newUserName, newUserDoB, newUserAge);
+        }
+        if (Request.Form["userId"] != null)
+        {
+
+            var userId = Request.Form["userId"];
+            message += "<p>This user have this awards:</p>";
+            foreach(Award a in UserLogic.GetAwards(userId))
+            {
+                message += $"<p>{a.Title}<p>";
+            }
+        }
+        if (Request.Form["removeUserId"] != null)
+        {
+            UserLogic.RemoveUserByID(Request.Form["removeUserId"]);
+        }
+        if(Request.Form["addUserId"] != null && Request.Form["addAwardId"] != null)
+        {
+            UserLogic.AddAward(Request.Form["addUserId"], Request.Form["addAwardId"]);
+        }
+    }
+
 
 }
 <!DOCTYPE html>
@@ -16,14 +49,71 @@
     <div>
         <p>Select what u want:</p>
         <button id="newUser">Create new user</button>
-        <button id="displayUsers" onclick="">Display all users</button>
+        <button id="displayUsers">Display all users</button>
         <button id="displayAwards">Display awards which have this user</button>
         <button id="removeUser">Remove User</button>
         <button id="addAward">Add award to user</button>
         <button id="back"><a href="~/Pages/StartPage.cshtml">Go back</a></button>
     </div>
-    <asp:Div id="Out">
+    <div id="Out">
+        @if (IsPost)
+        {
+            @Html.Raw(message);
+        }
+    </div>
+    <script type="text/javascript">
+        const createUserBtn = document.getElementById('newUser');
+        const displayUsersBtn = document.getElementById('displayUsers');
+        const displayAwards = document.getElementById('displayAwards');
+        const removeUser = document.getElementById('removeUser');
+        const addAward = document.getElementById('addAward');
+        const output = document.getElementById('Out');
 
-    </asp:Div>
+        createUserBtn.addEventListener("click", () => {
+            output.innerHTML = "<form method='post'><p>Insert User Name</p><input name='newUserName'>" +
+                "<p>Insert Date of Birth(dd/MM/yyyy)</p><input name='newUserDoB'>" +
+                "<p>Insert Age</p><input name='newUserAge'>" +
+                "<p><input type='submit' id='submitNewUserBtn'></p></form>";
+
+        });
+
+        displayUsersBtn.addEventListener("click", () => {
+            output.innerHTML = '<table id="table" style="border: 4px double black;"><tr><td>ID</td>' +
+                '<td>Name</td><td>DateOfBirth</td><td>Age</td><tr></table>';
+            let table = document.getElementById('table');
+            @foreach(User user in UserLogic.GetAllUsers())
+            {<text>
+            table.innerHTML += `<tr><td>${'@user.ID'}</td><td>${'@user.Name'}</td> 
+                <td>${'@user.DoB.ToString("dd/MM/yyyy")'}</td><td>${'@user.Age'}</td><tr>`;
+             </text>
+            }
+        });
+
+        displayAwards.addEventListener("click", () => {
+            output.innerHTML = "<form method='post'><p>Insert Id</p><input name='userId'><input type='submit' id='submitAwardsBtn'></form>";
+        });
+
+        removeUser.addEventListener("click", () => {
+            output.innerHTML = "<form method='post'><p>Insert Id</p><input name='removeUserId'><input type='submit' id='submitAwardsBtn'></form>";
+        });
+
+        addAward.addEventListener("click", () => {
+            output.innerHTML = "<form method='post'>" +
+                "<p> Insert user Id</p><input name='addUserId'>" +
+                "<p> Insert award Id</p><input name='addAwardId'>" +
+                "<input type='submit' id='submitAwardsBtn'></form >" +
+                "<p>AWARDS:</p>";
+
+            output.innerHTML += '<table id="table" style="border: 4px double black;"><tr><td>ID</td>' +
+                '<td>Title</td><tr></table>';
+            let table = document.getElementById('table');
+            @foreach(Award award in AwardLogic.GetAllAwards())
+            {<text>
+            table.innerHTML += `<tr><td>${'@award.ID'}</td><td>${'@award.Title'}</td><tr>`;
+             </text>
+            }
+        });
+
+    </script>
 </body>
 </html>
