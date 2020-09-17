@@ -98,6 +98,7 @@
     <None Include="packages.config" />
     <Content Include="Pages\StartPage.cshtml" />
     <Content Include="Pages\UserManager.cshtml" />
+    <Content Include="Pages\AwardManager.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
