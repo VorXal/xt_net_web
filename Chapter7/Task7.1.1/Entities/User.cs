@@ -29,9 +29,9 @@ namespace Entities
         }
 
         public string ID { get; private set; }
-        public string Name { get; private set; }
-        public DateTime DoB { get; private set; }
-        public int Age { get; private set; }
+        public string Name { get; set; }
+        public DateTime DoB { get; set; }
+        public int Age { get; set; }
         public List<string> Awards { get; private set; }
     }
 }

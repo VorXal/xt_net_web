@@ -34,6 +34,29 @@
         {
             UserLogic.AddAward(Request.Form["addUserId"], Request.Form["addAwardId"]);
         }
+        if(Request.Form["editUserId"] != null)
+        {
+            message = "";
+            if(UserLogic.GetUserByID(Request.Form["editUserId"]) != null)
+            {
+                var obj = UserLogic.GetUserByID(Request.Form["editUserId"]);
+                message += "<form method='post'>";
+                message += $"<p>User with id:<input name='editUserId' value='{obj.ID}' readonly></p>";
+                message += $"<p>Have name <input name='editUserName' value='{obj.Name}'></p>";
+                message += $"<p>Was born <input name='editUserDoB' value='{obj.DoB}'</p>";
+                message += $"<p>And <input name='editUserAge' value='{obj.Age}'> years old</p><input type='submit'></form>";
+            }
+            else
+            {
+                message = $"We can't find user with ID:{Request.Form["editUserId"]}";
+            }
+        }
+        if(Request.Form["editUserName"] != null)
+        {
+            UserLogic.EditUser(Request.Form["editUserId"], Request.Form["editUserName"],
+                               Request.Form["editUserDoB"].AsDateTime(), Request.Form["editUserAge"].AsInt());
+            message = "User successefuly changed!";
+        }
     }
 
 
@@ -53,6 +76,7 @@
         <button id="displayAwards">Display awards which have this user</button>
         <button id="removeUser">Remove User</button>
         <button id="addAward">Add award to user</button>
+        <button id="editUser">Edit User</button>
         <button id="back"><a href="~/Pages/StartPage.cshtml">Go back</a></button>
     </div>
     <div id="Out">
@@ -67,6 +91,7 @@
         const displayAwards = document.getElementById('displayAwards');
         const removeUser = document.getElementById('removeUser');
         const addAward = document.getElementById('addAward');
+        const editUser = document.getElementById('editUser');
         const output = document.getElementById('Out');
 
         createUserBtn.addEventListener("click", () => {
@@ -112,6 +137,10 @@
             table.innerHTML += `<tr><td>${'@award.ID'}</td><td>${'@award.Title'}</td><tr>`;
              </text>
             }
+        });
+
+        editUser.addEventListener("click", () => {
+            output.innerHTML = "<form method='post'><p>Insert Id</p><input name='editUserId'><input type='submit' id='submitAwardsBtn'></form>";
         });
 
     </script>

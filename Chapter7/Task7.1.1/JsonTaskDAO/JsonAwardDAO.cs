@@ -58,6 +58,12 @@ namespace JsonTaskDAO
 
             UpdateDatabase(temp);
         }
+        public void EditAward(string id, string title)
+        {
+            List<Award> all = GetAllAwards();
+            all.FirstOrDefault(n => n.ID.Equals(id)).Title = title;
+            UpdateDatabase(all);
+        }
 
         public void UpdateDatabase(List<Award> temp)
         {

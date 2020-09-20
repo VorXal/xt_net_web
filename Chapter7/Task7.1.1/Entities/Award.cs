@@ -26,7 +26,7 @@ namespace Entities
         }
 
         public string ID { get; private set; }
-        public string Title { get; private set; }
+        public string Title { get; set; }
         public List<string> Users { get; private set; }
     }
 }

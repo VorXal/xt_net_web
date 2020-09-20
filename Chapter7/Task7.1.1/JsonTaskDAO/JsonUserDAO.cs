@@ -37,6 +37,17 @@ namespace JsonTaskDAO
             UpdateDatabase(temp);
         }
 
+        public void EditUser(string id, string name, DateTime dob, int age)
+        {
+            List<User> temp = GetAllUsers();
+            var user = temp.FirstOrDefault(n => n.ID.Equals(id));
+            user.Name = name;
+            user.DoB = dob;
+            user.Age = age;
+
+            UpdateDatabase(temp);
+        }
+
         public List<User> GetAllUsers()
         {
             string json = File.ReadAllText(pathToFile);

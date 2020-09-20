@@ -61,5 +61,10 @@ namespace TaskManager
             }
             _awardDAO.RemoveAwardByID(id);
         }
+
+        public void EditAward(string id, string title)
+        {
+            _awardDAO.EditAward(id, title);
+        }
     }
 }

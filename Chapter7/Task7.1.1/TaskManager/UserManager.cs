@@ -30,6 +30,11 @@ namespace TaskManager
             _userDAO.AddUser(new User(name, dob, age));
         }
 
+        public void EditUser(string id, string name, DateTime dob, int age)
+        {
+            _userDAO.EditUser(id, name, dob, age);
+        }
+
         public List<User> GetAllUsers()
         {
             return _userDAO.GetAllUsers();
