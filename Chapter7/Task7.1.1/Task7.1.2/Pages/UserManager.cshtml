@@ -2,10 +2,12 @@
 @using DependencyResolver
 @using Entities
 @{
+    Layout = "_Layout.cshtml";
     IUserBLL UserLogic = DependencyResolver.UserLogic;
     IAwardBLL AwardLogic = DependencyResolver.AwardLogic;
     var message = "";
 
+    Page.Title = "User Manager";
 
     if (IsPost)
     {
@@ -61,14 +63,7 @@
 
 
 }
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>UserManager</title>
-</head>
-<body>
     <div>
         <p>Select what u want:</p>
         <button id="newUser">Create new user</button>
@@ -144,5 +139,3 @@
         });
 
     </script>
-</body>
-</html>

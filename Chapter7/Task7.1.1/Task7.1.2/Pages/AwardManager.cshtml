@@ -2,9 +2,12 @@
 @using DependencyResolver
 @using Entities
 @{
+    Layout = "_Layout.cshtml";
     IUserBLL UserLogic = DependencyResolver.UserLogic;
     IAwardBLL AwardLogic = DependencyResolver.AwardLogic;
     var message = "";
+
+    Page.Title = "Award Manager";
 
     if (IsPost)
     {
@@ -55,14 +58,7 @@
     }
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AwardManager</title>
-</head>
-<body>
     <div>
         <p>Select what u want:</p>
         <button id="newAward">Create new award</button>
@@ -132,5 +128,3 @@
              </text>}
         });
     </script>
-</body>
-</html>
