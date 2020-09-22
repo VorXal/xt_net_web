@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonAccountDAO.cs" />
     <Compile Include="JsonAwardDAO.cs" />
     <Compile Include="JsonUserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

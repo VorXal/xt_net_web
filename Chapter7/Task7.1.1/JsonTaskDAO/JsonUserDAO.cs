@@ -16,7 +16,7 @@ namespace JsonTaskDAO
     public class JsonUserDAO : IUserDAO
     {
 
-        private static string pathToFile = WebConfigurationManager.AppSettings.Get("pathToUserJSON");
+        private static readonly string pathToFile = WebConfigurationManager.AppSettings.Get("pathToUserJSON");
         
         public void AddAward(string id, string awardId)
         {

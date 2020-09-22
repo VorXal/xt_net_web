@@ -1,9 +1,15 @@
 ﻿@{
     Layout = "_Layout.cshtml";
     Page.Title = "Start";
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~/Pages/SignIn.cshtml");
+    }
 }
 
 <div class="menu">
+
     <button onclick="location.href ='UserManager.cshtml'" id="btn-oum">Open UserManager</button>
     <button onclick="location.href ='AwardManager.cshtml'" id="btn-oam">Open AwardManager</button>
+    <button onclick="location.href ='SignOut.cshtml'">Sign Out</button>
 </div>

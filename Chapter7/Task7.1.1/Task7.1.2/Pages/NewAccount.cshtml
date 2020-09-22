@@ -1,0 +1,39 @@
+﻿@using Common;
+@using DependencyResolver;
+@{
+    Layout = "_Layout.cshtml";
+    Page.Title = "Welcome!";
+    IAccountBLL AccountLogic = DependencyResolver.AccountLogic;
+    var alert = "";
+    if (IsPost)
+    {
+        if(AccountLogic.CanCreateAccount(Request["login"], Request["password"]))
+        {
+            AccountLogic.AddAcount(Request["login"], Request["password"]);
+            Response.Redirect("~/Pages/SignIn.cshtml");
+        }
+        else
+        {
+            alert = "Let's try with another login";
+        }
+    }
+}
+
+<div>
+    <p>Dear, guest!</p>
+    <p></p>
+    <form method="post">
+        <p>Input your login: </p>
+        <input type="text" name="login" />
+        <p>Input your password: </p>
+        <input type="password" name="password" />
+        <button type="submit">Create account!</button>
+    </form>
+    <button onclick="location.href = 'SignIn.cshtml'">Go back</button>
+    <strong style="display:block; margin-top:50px; font-size:30px;">
+        @if (IsPost)
+        {
+            @Html.Raw(alert);
+        }
+    </strong>
+</div>

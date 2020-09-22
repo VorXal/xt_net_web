@@ -1,0 +1,27 @@
+[
+  {
+    "ID": "39c9ccb6-3dbf-43f4-9e5f-fbaf96614dd2",
+    "Login": "admin",
+    "Password": "admin",
+    "Roles": [
+      "admin",
+      "user"
+    ]
+  },
+  {
+    "ID": "5a70fc18-86aa-4ec5-b31f-3584c7b29ebf",
+    "Login": "alexey",
+    "Password": "alexey",
+    "Roles": [
+      "user"
+    ]
+  },
+  {
+    "ID": "b3f4f6cd-11b1-4684-b348-9f2ea0f4c77f",
+    "Login": "vorxal",
+    "Password": "123456al",
+    "Roles": [
+      "user"
+    ]
+  }
+]

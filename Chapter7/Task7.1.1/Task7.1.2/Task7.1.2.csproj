@@ -91,6 +91,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Auth.cs" />
+    <Compile Include="Models\MyRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +101,9 @@
     <Content Include="Pages\StartPage.cshtml" />
     <Content Include="Pages\UserManager.cshtml" />
     <Content Include="Pages\AwardManager.cshtml" />
+    <Content Include="Pages\SignIn.cshtml" />
+    <Content Include="Pages\SignOut.cshtml" />
+    <Content Include="Pages\NewAccount.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

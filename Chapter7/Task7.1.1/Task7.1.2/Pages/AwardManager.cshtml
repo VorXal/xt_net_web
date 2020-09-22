@@ -2,6 +2,11 @@
 @using DependencyResolver
 @using Entities
 @{
+    if (!User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("~/Pages/SignIn.cshtml");
+    }
+
     Layout = "_Layout.cshtml";
     IUserBLL UserLogic = DependencyResolver.UserLogic;
     IAwardBLL AwardLogic = DependencyResolver.AwardLogic;
@@ -61,12 +66,16 @@
 
     <div>
         <p>Select what u want:</p>
-        <button id="newAward">Create new award</button>
+
         <button id="displayAwards">Display all awards</button>
         <button id="displayUsers">Display users which have this award</button>
-        <button id="removeAward">Remove award</button>
-        <button id="addUser">Add user to award</button>
-        <button id="editAward">Edit award</button>
+        @if (User.IsInRole("admin"))
+        {
+            <button id="newAward">Create new award</button>
+            <button id="removeAward">Remove award</button>
+            <button id="addUser">Add user to award</button>
+            <button id="editAward">Edit award</button>
+        }
         <button id="back"><a href="~/Pages/StartPage.cshtml">Go back</a></button>
     </div>
     <div id="Out">
@@ -77,54 +86,85 @@
     </div>
 
     <script type="text/javascript">
-        const output = document.getElementById('Out');
-        const newAward = document.getElementById('newAward');
-        const displayAwards = document.getElementById('displayAwards');
-        const displayUsers = document.getElementById('displayUsers');
-        const removeAward = document.getElementById('removeAward');
-        const addUser = document.getElementById('addUser');
-        const editAward = document.getElementById('editAward');
+        @if (User.IsInRole("admin"))
+        {
+            <text>
+                const output = document.getElementById('Out');
+                const newAward = document.getElementById('newAward');
+                const displayAwards = document.getElementById('displayAwards');
+                const displayUsers = document.getElementById('displayUsers');
+                const removeAward = document.getElementById('removeAward');
+                const addUser = document.getElementById('addUser');
+                const editAward = document.getElementById('editAward');
 
-        newAward.addEventListener("click", () => {
-            output.innerHTML = `<form method='post'><p>Input Title</p><input name='newAward'><input type='submit' id='submitNewAwardBtn'></form>`;
-        });
+                newAward.addEventListener("click", () => {
+                    output.innerHTML = `<form method='post'><p>Input Title</p><input name='newAward'><input type='submit' id='submitNewAwardBtn'></form>`;
+                });
 
-        displayAwards.addEventListener("click", () => {
-            output.innerHTML = "";
-            output.innerHTML += `<p><strong>AWARDAS:::</strong></p><table id="table" style="border: 4px double black;"><tr><td>ID</td>
-                <td>Title</td><tr></table>`;
-            let table = document.getElementById('table');
-            @foreach (Award award in AwardLogic.GetAllAwards())
-            {
-                <text>
-                table.innerHTML += `<tr><td>${'@award.ID'}</td><td>${'@award.Title'}</td><tr>`;
-                </text>
-            }
-        });
+                displayAwards.addEventListener("click", () => {
+                    output.innerHTML = "";
+                    output.innerHTML += `<p><strong>AWARDAS:::</strong></p><table id="table" style="border: 4px double black;"><tr><td>ID</td>
+                        <td>Title</td><tr></table>`;
+                    let table = document.getElementById('table');
+                    @foreach (Award award in AwardLogic.GetAllAwards())
+                    {
+                        <text>
+                        table.innerHTML += `<tr><td>${'@award.ID'}</td><td>${'@award.Title'}</td><tr>`;
+                        </text>
+                    }
+                });
 
-        displayUsers.addEventListener("click", () => {
-            output.innerHTML = `<form method="post"><p>Input award Id</p><input name="awardId"><input type='submit' id='submitDisplayUsersBtn'></form>`;
-        });
+                displayUsers.addEventListener("click", () => {
+                    output.innerHTML = `<form method="post"><p>Input award Id</p><input name="awardId"><input type='submit' id='submitDisplayUsersBtn'></form>`;
+                });
 
-        removeAward.addEventListener("click", () => {
-            output.innerHTML = `<form method="post"><p>Input award Id</p><input name="removeAwardId"><input type='submit' 
-                                onclick="return confirm('Are you really want delete this award?')" id='submitRemoveAwardBtn'></form>`;
-        });
+                removeAward.addEventListener("click", () => {
+                    output.innerHTML = `<form method="post"><p>Input award Id</p><input name="removeAwardId"><input type='submit'
+                                        onclick="return confirm('Are you really want delete this award?')" id='submitRemoveAwardBtn'></form>`;
+                });
 
-        editAward.addEventListener("click", () => {
-            output.innerHTML = `<form method="post"><p>Input award Id</p><input name="editAwardId"><input type='submit' id='submitEditAwardBtn'></form>`;
-        });
+                editAward.addEventListener("click", () => {
+                    output.innerHTML = `<form method="post"><p>Input award Id</p><input name="editAwardId"><input type='submit' id='submitEditAwardBtn'></form>`;
+                });
 
-        addUser.addEventListener("click", () => {
-            output.innerHTML = `<form method="post"><p>Input award Id</p><input name="addUserAwardId">
-                                <p>Input user Id</p><input name="addUserId">
-                                <input type='submit' id='submitRemoveAwardBtn'></form>`;
-            output.innerHTML += "<p>Users</p>"
-            output.innerHTML += "<table id='table' style='border: 4px double black;'><tr><td>ID</td><td>Name</td><tr></table>";
-            let table = document.getElementById('table');
-            @foreach(User user in UserLogic.GetAllUsers())
-            {<text>
-                table.innerHTML += "<tr><td>@user.ID</td><td>@user.Name</td><tr>";
-             </text>}
-        });
+                addUser.addEventListener("click", () => {
+                    output.innerHTML = `<form method="post"><p>Input award Id</p><input name="addUserAwardId">
+                                        <p>Input user Id</p><input name="addUserId">
+                                        <input type='submit' id='submitRemoveAwardBtn'></form>`;
+                    output.innerHTML += "<p>Users</p>"
+                    output.innerHTML += "<table id='table' style='border: 4px double black;'><tr><td>ID</td><td>Name</td><tr></table>";
+                    let table = document.getElementById('table');
+                    @foreach(User user in UserLogic.GetAllUsers())
+                    {<text>
+                        table.innerHTML += "<tr><td>@user.ID</td><td>@user.Name</td><tr>";
+                     </text>}
+                });
+            </text>
+        }
+        else
+        {
+            <text>
+                const output = document.getElementById('Out');
+                const displayAwards = document.getElementById('displayAwards');
+                const displayUsers = document.getElementById('displayUsers');
+
+                displayAwards.addEventListener("click", () => {
+                    output.innerHTML = "";
+                    output.innerHTML += `<p><strong>AWARDAS:::</strong></p><table id="table" style="border: 4px double black;"><tr><td>ID</td>
+                        <td>Title</td><tr></table>`;
+                    let table = document.getElementById('table');
+                    @foreach (Award award in AwardLogic.GetAllAwards())
+                    {
+                        <text>
+                        table.innerHTML += `<tr><td>${'@award.ID'}</td><td>${'@award.Title'}</td><tr>`;
+                        </text>
+                    }
+                });
+
+                displayUsers.addEventListener("click", () => {
+                    output.innerHTML = `<form method="post"><p>Input award Id</p><input name="awardId"><input type='submit' id='submitDisplayUsersBtn'></form>`;
+                });
+            </text>
+        }
+
     </script>

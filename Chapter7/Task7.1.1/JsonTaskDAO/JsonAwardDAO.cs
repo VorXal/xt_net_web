@@ -14,7 +14,7 @@ namespace JsonTaskDAO
 {
     public class JsonAwardDAO : IAwardDAO
     {
-        private static string pathToFile = WebConfigurationManager.AppSettings.Get("pathToAwardJSON");
+        private static readonly string pathToFile = WebConfigurationManager.AppSettings.Get("pathToAwardJSON");
 
         public void AddAward(Award award)
         {

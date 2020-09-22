@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAccountBLL.cs" />
+    <Compile Include="IAccountDAO.cs" />
     <Compile Include="IAwardBLL.cs" />
     <Compile Include="IAwardDAO.cs" />
     <Compile Include="IAwardPL.cs" />
